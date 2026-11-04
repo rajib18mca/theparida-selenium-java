@@ -1,0 +1,36 @@
+name: Selenium website tests
+# Manual only: uploading the project does not start test traffic automatically.
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: 'Website root (use a deployed preview for this version)'
+        required: true
+        default: 'https://theparida.com/'
+        type: string
+permissions:
+  contents: read
+jobs:
+  ui-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - name: Run Selenium tests
+        env:
+          BASE_URL: ${{ inputs.base_url }}
+        run: mvn -B test "-DbaseUrl=$BASE_URL" -Dheadless=true -DnoSandbox=true
+      - name: Save test reports and failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: selenium-results
+          path: |
+            target/surefire-reports/
+            target/screenshots/
+          if-no-files-found: ignore

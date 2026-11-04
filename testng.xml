@@ -1,0 +1,9 @@
+<suite name="The Parida website" parallel="false">
+ <test name="Website regression"><classes>
+  <class name="com.theparida.tests.NavigationTest"/>
+  <class name="com.theparida.tests.ContactTest"/>
+  <class name="com.theparida.tests.BillingEnquiryTest"/>
+  <class name="com.theparida.tests.CareersTest"/>
+  <class name="com.theparida.tests.RoadmapInvestmentTest"/>
+ </classes></test>
+</suite>

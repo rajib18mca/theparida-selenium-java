@@ -1,0 +1,12 @@
+/target/
+/.idea/
+/.settings/
+/.classpath
+/.project
+*.iml
+*.log
+.env
+/config.local.properties
+/website-under-test/
+*.rar
+*.zip
